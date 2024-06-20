@@ -1,0 +1,10 @@
+<phpunit
+    backupGlobals           = "false"
+    backupStaticAttributes  = "false"
+    >
+    <testsuites>
+        <testsuite name="all">
+            <directory>vendor/php-ds/tests/tests</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

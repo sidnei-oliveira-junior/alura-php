@@ -1,0 +1,275 @@
+#ifndef DS_ARGINFO_H
+#define DS_ARGINFO_H
+
+#define ARGINFO_NONE(name) \
+ZEND_BEGIN_ARG_INFO_EX(arginfo_##name, 0, 0, 0) \
+ZEND_END_ARG_INFO()
+
+#define ARGINFO_OPTIONAL_ZVAL(name, z) \
+ZEND_BEGIN_ARG_INFO_EX(arginfo_##name, 0, 0, 0) \
+ZEND_ARG_INFO(0, z) \
+ZEND_END_ARG_INFO()
+
+#define ARGINFO_OPTIONAL_ZVAL_OPTIONAL_ZVAL(name, z1, z2) \
+ZEND_BEGIN_ARG_INFO_EX(arginfo_##name, 0, 0, 0) \
+ZEND_ARG_INFO(0, z1) \
+ZEND_ARG_INFO(0, z2) \
+ZEND_END_ARG_INFO()
+
+#define ARGINFO_CALLABLE_OPTIONAL_ZVAL(name, c, z) \
+ZEND_BEGIN_ARG_INFO_EX(arginfo_##name, 0, 0, 1) \
+ZEND_ARG_TYPE_INFO(0, c, IS_CALLABLE, 0) \
+ZEND_ARG_INFO(0, z) \
+ZEND_END_ARG_INFO()
+
+#define ARGINFO_OPTIONAL_STRING(name, s) \
+ZEND_BEGIN_ARG_INFO_EX(arginfo_##name, 0, 0, 0) \
+ZEND_ARG_TYPE_INFO(0, s, IS_STRING, 0) \
+ZEND_END_ARG_INFO()
+
+#define ARGINFO_OPTIONAL_CALLABLE(name, c) \
+ZEND_BEGIN_ARG_INFO_EX(arginfo_##name, 0, 0, 0) \
+ZEND_ARG_TYPE_INFO(0, c, IS_CALLABLE, 1) \
+ZEND_END_ARG_INFO()
+
+#define ARGINFO_CALLABLE(name, c) \
+ZEND_BEGIN_ARG_INFO_EX(arginfo_##name, 0, 0, 1) \
+ZEND_ARG_TYPE_INFO(0, c, IS_CALLABLE, 0) \
+ZEND_END_ARG_INFO()
+
+#define ARGINFO_VARIADIC_ZVAL(name, v) \
+ZEND_BEGIN_ARG_INFO_EX(arginfo_##name, 0, 0, 0) \
+ZEND_ARG_VARIADIC_INFO(0, v) \
+ZEND_END_ARG_INFO()
+
+#define ARGINFO_LONG(name, i) \
+ZEND_BEGIN_ARG_INFO_EX(arginfo_##name, 0, 0, 1) \
+ZEND_ARG_TYPE_INFO(0, i, IS_LONG, 0) \
+ZEND_END_ARG_INFO()
+
+#define ARGINFO_LONG_ZVAL(name, i, z) \
+ZEND_BEGIN_ARG_INFO_EX(arginfo_##name, 0, 0, 2) \
+ZEND_ARG_TYPE_INFO(0, i, IS_LONG, 0) \
+ZEND_ARG_INFO(0, z) \
+ZEND_END_ARG_INFO()
+
+#define ARGINFO_ZVAL_LONG(name, z, i) \
+ZEND_BEGIN_ARG_INFO_EX(arginfo_##name, 0, 0, 2) \
+ZEND_ARG_INFO(0, z) \
+ZEND_ARG_TYPE_INFO(0, i, IS_LONG, 0) \
+ZEND_END_ARG_INFO()
+
+#define ARGINFO_ZVAL(name, z) \
+ZEND_BEGIN_ARG_INFO_EX(arginfo_##name, 0, 0, 1) \
+ZEND_ARG_INFO(0, z) \
+ZEND_END_ARG_INFO()
+
+#define ARGINFO_ZVAL_ZVAL(name, z1, z2) \
+ZEND_BEGIN_ARG_INFO_EX(arginfo_##name, 0, 0, 2) \
+ZEND_ARG_INFO(0, z1) \
+ZEND_ARG_INFO(0, z2) \
+ZEND_END_ARG_INFO()
+
+#define ARGINFO_ZVAL_OPTIONAL_ZVAL(name, z1, z2) \
+ZEND_BEGIN_ARG_INFO_EX(arginfo_##name, 0, 0, 1) \
+ZEND_ARG_INFO(0, z1) \
+ZEND_ARG_INFO(0, z2) \
+ZEND_END_ARG_INFO()
+
+#define ARGINFO_LONG_VARIADIC_ZVAL(name, i, v) \
+ZEND_BEGIN_ARG_INFO_EX(arginfo_##name, 0, 0, 1) \
+ZEND_ARG_TYPE_INFO(0, i, IS_LONG, 0) \
+ZEND_ARG_VARIADIC_INFO(0, v) \
+ZEND_END_ARG_INFO()
+
+#if PHP_VERSION_ID >= 80100
+
+#define ARGINFO_OFFSET_GET(name) \
+    ZEND_BEGIN_ARG_WITH_TENTATIVE_RETURN_TYPE_INFO_EX(arginfo_##name, 0, 1, IS_MIXED, 0) \
+	ZEND_ARG_TYPE_INFO(0, offset, IS_MIXED, 0) \
+    ZEND_END_ARG_INFO()
+
+#define ARGINFO_OFFSET_SET(name) \
+    ZEND_BEGIN_ARG_WITH_TENTATIVE_RETURN_TYPE_INFO_EX(arginfo_##name, 0, 2, IS_VOID, 0) \
+	ZEND_ARG_TYPE_INFO(0, offset, IS_MIXED, 0) \
+	ZEND_ARG_TYPE_INFO(0, value, IS_MIXED, 0) \
+    ZEND_END_ARG_INFO()
+
+#define ARGINFO_OFFSET_UNSET(name) \
+    ZEND_BEGIN_ARG_WITH_TENTATIVE_RETURN_TYPE_INFO_EX(arginfo_##name, 0, 1, IS_VOID, 0) \
+	ZEND_ARG_TYPE_INFO(0, offset, IS_MIXED, 0) \
+    ZEND_END_ARG_INFO()
+
+#elif PHP_VERSION_ID >= 80000
+
+#define ARGINFO_OFFSET_GET(name) \
+    ZEND_BEGIN_ARG_INFO_EX(arginfo_##name, 0, 0, 1) \
+	ZEND_ARG_TYPE_INFO(0, offset, IS_MIXED, 0) \
+    ZEND_END_ARG_INFO()
+
+#define ARGINFO_OFFSET_SET(name) \
+    ZEND_BEGIN_ARG_INFO_EX(arginfo_##name, 0, 0, 2) \
+	ZEND_ARG_TYPE_INFO(0, offset, IS_MIXED, 0) \
+	ZEND_ARG_TYPE_INFO(0, value, IS_MIXED, 0) \
+    ZEND_END_ARG_INFO()
+
+#define ARGINFO_OFFSET_UNSET(name) \
+    ZEND_BEGIN_ARG_INFO_EX(arginfo_##name, 0, 0, 1) \
+	ZEND_ARG_TYPE_INFO(0, offset, IS_MIXED, 0) \
+    ZEND_END_ARG_INFO()
+
+#else
+
+#define ARGINFO_OFFSET_GET(name) \
+    ZEND_BEGIN_ARG_INFO_EX(arginfo_##name, 0, 0, 1) \
+    ZEND_ARG_INFO(0, offset) \
+    ZEND_END_ARG_INFO()
+
+#define ARGINFO_OFFSET_SET(name) \
+    ZEND_BEGIN_ARG_INFO_EX(arginfo_##name, 0, 0, 2) \
+    ZEND_ARG_INFO(0, offset) \
+    ZEND_ARG_INFO(0, value) \
+    ZEND_END_ARG_INFO()
+
+#define ARGINFO_OFFSET_UNSET(name) \
+    ZEND_BEGIN_ARG_INFO_EX(arginfo_##name, 0, 0, 1) \
+    ZEND_ARG_INFO(0, offset) \
+    ZEND_END_ARG_INFO()
+
+#endif
+
+#if PHP_VERSION_ID >= 80100
+
+#define ARGINFO_NONE_RETURN_TYPE(name, type) \
+    ZEND_BEGIN_ARG_WITH_TENTATIVE_RETURN_TYPE_INFO_EX(arginfo_##name, 0, 0, type, 0) \
+    ZEND_END_ARG_INFO()
+#else
+
+#define ARGINFO_NONE_RETURN_TYPE(name, type) \
+    ZEND_BEGIN_ARG_INFO_EX(arginfo_##name, 0, 0, 0) \
+    ZEND_END_ARG_INFO()
+
+#endif
+
+#if PHP_VERSION_ID >= 80000
+#define DS_BEGIN_ARG_WITH_RETURN_DS_INFO_EX(name, pass_by_ref, required_num_args, class_name, allow_null) \
+    static const zend_internal_arg_info arginfo_##name[] = { \
+        { (const char*)(zend_uintptr_t)(required_num_args), ZEND_TYPE_INIT_CLASS_CONST(PHP_DS_NS_NAME#class_name, allow_null, 0), pass_by_ref},
+#elif PHP_VERSION_ID >= 70200
+#define DS_BEGIN_ARG_WITH_RETURN_DS_INFO_EX(name, pass_by_ref, required_num_args, class_name, allow_null) \
+    static const zend_internal_arg_info arginfo_##name[] = { \
+        { (const char*)(zend_uintptr_t)(required_num_args), ZEND_TYPE_ENCODE_CLASS_CONST(PHP_DS_NS_NAME#class_name, allow_null), pass_by_ref, 0 },
+#else
+#define DS_BEGIN_ARG_WITH_RETURN_DS_INFO_EX(name, pass_by_ref, required_num_args, class_name, allow_null) \
+    static const zend_internal_arg_info arginfo_##name[] = { \
+        { (const char*)(zend_uintptr_t)(required_num_args), PHP_DS_NS_NAME#class_name, IS_OBJECT, pass_by_ref, allow_null, 0 },
+#endif
+
+#if PHP_VERSION_ID >= 80000
+#define DS_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(name, pass_by_ref, required_num_args, class_name, allow_null) \
+    static const zend_internal_arg_info arginfo_##name[] = { \
+        { (const char*)(zend_uintptr_t)(required_num_args), ZEND_TYPE_INIT_CLASS_CONST(class_name, allow_null, 0), pass_by_ref},
+#elif PHP_VERSION_ID >= 70200
+#define DS_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(name, pass_by_ref, required_num_args, class_name, allow_null) \
+	static const zend_internal_arg_info arginfo_##name[] = { \
+		{ (const char*)(zend_uintptr_t)(required_num_args), ZEND_TYPE_ENCODE_CLASS_CONST(class_name, allow_null), pass_by_ref, 0 },
+#else
+#define DS_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(name, pass_by_ref, required_num_args, class_name, allow_null) \
+	static const zend_internal_arg_info arginfo_##name[] = { \
+		{ (const char*)(zend_uintptr_t)(required_num_args), class_name, IS_OBJECT, pass_by_ref, allow_null, 0 },
+#endif
+
+#if PHP_VERSION_ID >= 80100
+#define DS_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(name, pass_by_ref, required_num_args, type, allow_null) \
+    static const zend_internal_arg_info arginfo_##name[] = { \
+        { (const char*)(zend_uintptr_t)(required_num_args), ZEND_TYPE_INIT_CODE(type, allow_null, _ZEND_ARG_INFO_FLAGS(pass_by_ref, 0, 0)) },
+#elif PHP_VERSION_ID >= 80000
+#define DS_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(name, pass_by_ref, required_num_args, type, allow_null) \
+    static const zend_internal_arg_info arginfo_##name[] = { \
+        { (const char*)(zend_uintptr_t)(required_num_args), ZEND_TYPE_INIT_CODE(type, allow_null, _ZEND_ARG_INFO_FLAGS(pass_by_ref, 0)) },
+#elif PHP_VERSION_ID >= 70200
+#define DS_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(name, pass_by_ref, required_num_args, type, allow_null) \
+	static const zend_internal_arg_info arginfo_##name[] = { \
+		{ (const char*)(zend_uintptr_t)(required_num_args), ZEND_TYPE_ENCODE(type, allow_null), pass_by_ref, 0 },
+#else
+#define DS_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(name, pass_by_ref, required_num_args, type, allow_null) \
+	static const zend_internal_arg_info arginfo_##name[] = { \
+		{ (const char*)(zend_uintptr_t)(required_num_args), NULL, type, pass_by_ref, allow_null, 0 },
+#endif
+
+#define ARGINFO_ZVAL_RETURN_BOOL(name, z) \
+    DS_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(name, 0, 1, _IS_BOOL, 0) \
+    ZEND_ARG_INFO(0, z) \
+    ZEND_END_ARG_INFO()
+
+#define ARGINFO_CALLABLE_RETURN_DS(name, c, col) \
+    DS_BEGIN_ARG_WITH_RETURN_DS_INFO_EX(name, 0, 1, col, 0) \
+    ZEND_ARG_TYPE_INFO(0, c, IS_CALLABLE, 0) \
+    ZEND_END_ARG_INFO()
+
+#define ARGINFO_OPTIONAL_ZVAL_RETURN_DS(name, z, col) \
+    DS_BEGIN_ARG_WITH_RETURN_DS_INFO_EX(name, 0, 0, col, 0) \
+    ZEND_ARG_INFO(0, z) \
+    ZEND_END_ARG_INFO()
+
+#define ARGINFO_OPTIONAL_STRING_RETURN_STRING(name, s) \
+    DS_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(name, 0, 0, IS_STRING, 0) \
+    ZEND_ARG_TYPE_INFO(0, s, IS_STRING, 0) \
+    ZEND_END_ARG_INFO()
+
+#define ARGINFO_ZVAL_RETURN_DS(name, z, col) \
+    DS_BEGIN_ARG_WITH_RETURN_DS_INFO_EX(name, 0, 1, col, 0) \
+    ZEND_ARG_INFO(0, z) \
+    ZEND_END_ARG_INFO()
+
+#define ARGINFO_OPTIONAL_CALLABLE_RETURN_DS(name, c, col) \
+    DS_BEGIN_ARG_WITH_RETURN_DS_INFO_EX(name, 0, 0, col, 0) \
+    ZEND_ARG_TYPE_INFO(0, c, IS_CALLABLE, 1) \
+    ZEND_END_ARG_INFO()
+
+#define ARGINFO_LONG_OPTIONAL_LONG_RETURN_DS(name, i1, i2, col) \
+    DS_BEGIN_ARG_WITH_RETURN_DS_INFO_EX(name, 0, 1, col, 0) \
+    ZEND_ARG_TYPE_INFO(0, i1, IS_LONG, 0) \
+    ZEND_ARG_TYPE_INFO(0, i2, IS_LONG, 1) \
+    ZEND_END_ARG_INFO()
+
+#define ARGINFO_LONG_RETURN_DS(name, i, col) \
+    DS_BEGIN_ARG_WITH_RETURN_DS_INFO_EX(name, 0, 1, col, 0) \
+    ZEND_ARG_TYPE_INFO(0, i, IS_LONG, 0) \
+    ZEND_END_ARG_INFO()
+
+#define ARGINFO_NONE_RETURN_LONG(name) \
+    DS_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(name, 0, 0, IS_LONG, 0) \
+    ZEND_END_ARG_INFO()
+
+#define ARGINFO_NONE_RETURN_STRING(name) \
+    DS_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(name, 0, 0, IS_STRING, 0) \
+    ZEND_END_ARG_INFO()
+
+#define ARGINFO_NONE_RETURN_DS(name, class_name) \
+    DS_BEGIN_ARG_WITH_RETURN_DS_INFO_EX(name, 0, 0, class_name, 0) \
+    ZEND_END_ARG_INFO()
+
+#define ARGINFO_NONE_RETURN_OBJ(name, class_name) \
+    DS_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(name, 0, 0, #class_name, 0) \
+    ZEND_END_ARG_INFO()
+
+#define ARGINFO_NONE_RETURN_BOOL(name) \
+    DS_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(name, 0, 0, _IS_BOOL, 0) \
+    ZEND_END_ARG_INFO()
+
+#define ARGINFO_VARIADIC_ZVAL_RETURN_BOOL(name, v) \
+    DS_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(name, 0, 0, _IS_BOOL, 0) \
+    ZEND_ARG_VARIADIC_INFO(0, v) \
+    ZEND_END_ARG_INFO()
+
+#define ARGINFO_NONE_RETURN_ARRAY(name) \
+    DS_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(name, 0, 0, IS_ARRAY, 0) \
+    ZEND_END_ARG_INFO()
+
+#define ARGINFO_DS_RETURN_DS(name, obj, cls, col) \
+    DS_BEGIN_ARG_WITH_RETURN_DS_INFO_EX(name, 0, 1, col, 0) \
+    ZEND_ARG_OBJ_INFO(0, obj, Ds\\cls, 0) \
+    ZEND_END_ARG_INFO()
+
+#endif
